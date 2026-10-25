@@ -1,0 +1,180 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+:root {
+  --background: #ffffff;
+  --foreground: #102a43;
+  --card: #ffffff;
+  --card-foreground: #102a43;
+  --popover: #ffffff;
+  --popover-foreground: #102a43;
+  --primary: #007f73;
+  --primary-foreground: #ffffff;
+  --secondary: #e6f4f1;
+  --secondary-foreground: #102a43;
+  --muted: #f7f8fa;
+  --muted-foreground: #5b7083;
+  --accent: #e6f4f1;
+  --accent-foreground: #102a43;
+  --destructive: #b42318;
+  --border: rgb(16 42 67 / 0.12);
+  --input: rgb(16 42 67 / 0.18);
+  --ring: #007f73;
+  --radius: 1rem;
+
+  --ink: #001d2d;
+  --navy: #102a43;
+  --teal-deep: #00685e;
+  --gold: #b58b45;
+  --mint: #e6f4f1;
+  --mist: #f7f8fa;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-ink: var(--ink);
+  --color-navy: var(--navy);
+  --color-teal-deep: var(--teal-deep);
+  --color-gold: var(--gold);
+  --color-mint: var(--mint);
+  --color-mist: var(--mist);
+  --font-sans: var(--font-inter), system-ui, sans-serif;
+  --font-heading: var(--font-forum), Georgia, serif;
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+  --animate-marquee: marquee 40s linear infinite;
+  --animate-marquee-reverse: marquee 48s linear infinite reverse;
+  --animate-float: float 7s ease-in-out infinite;
+}
+
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+@keyframes float {
+  50% {
+    translate: 0 -14px;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+  }
+  body {
+    @apply bg-background font-sans text-foreground antialiased;
+  }
+}
+
+/* Shared definitions: one per role, reused by every section. */
+.wrap {
+  width: 100%;
+  max-width: 105rem;
+  margin-inline: auto;
+  padding-inline: clamp(1.25rem, 4vw, 4rem);
+}
+.section {
+  padding-block: clamp(4.5rem, 9vw, 8rem);
+}
+.t-eyebrow {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--primary);
+}
+.t-h1 {
+  font-family: var(--font-heading);
+  font-weight: 400;
+  font-size: clamp(3rem, 6.4vw, 6.5rem);
+  line-height: 1;
+  letter-spacing: -0.015em;
+}
+.t-h2 {
+  font-family: var(--font-heading);
+  font-weight: 400;
+  font-size: clamp(2.25rem, 4.6vw, 4rem);
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+}
+.t-h3 {
+  font-family: var(--font-heading);
+  font-weight: 400;
+  font-size: clamp(1.5rem, 2vw, 1.875rem);
+  line-height: 1.15;
+}
+.t-lead {
+  font-size: clamp(1.0625rem, 1.3vw, 1.25rem);
+  line-height: 1.65;
+  color: var(--muted-foreground);
+}
+.card-surface {
+  border-radius: var(--radius-3xl);
+  border: 1px solid var(--border);
+  background: var(--card);
+}
+
+/* Hover spotlight, driven by --mx/--my set in <Spotlight>. */
+.spot {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+.spot::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.4s;
+  background: radial-gradient(28rem circle at var(--mx, 50%) var(--my, 50%), rgb(0 127 115 / 0.16), transparent 60%);
+}
+.spot:hover::before {
+  opacity: 1;
+}
+
+.text-outline {
+  -webkit-text-stroke: 1.5px rgb(255 255 255 / 0.22);
+  color: transparent;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
