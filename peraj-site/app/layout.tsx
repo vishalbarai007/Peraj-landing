@@ -18,7 +18,15 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${forum.variable} ${inter.variable}`}>
+    <html lang="en" className={`${forum.variable} ${inter.variable}`} suppressHydrationWarning>
+      <head>
+        {/* Lets the hero hide its entrance pieces only when JS runs and motion is allowed. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `if(!matchMedia("(prefers-reduced-motion: reduce)").matches)document.documentElement.classList.add("js-motion")`,
+          }}
+        />
+      </head>
       <body>{children}</body>
     </html>
   );

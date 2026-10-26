@@ -1,20 +1,30 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { ArrowLeft, ArrowRight, Star } from "lucide-react";
+import Image from "next/image";
+import { ArrowLeft, ArrowRight, Quote, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Carousel, CarouselContent, CarouselItem, type CarouselApi } from "@/components/ui/carousel";
 import SectionHeading from "@/components/SectionHeading";
 import { proof } from "@/content/site";
 import { cn } from "@/lib/utils";
 
+// Slides render twice so Embla can loop with neighbours peeking on both sides.
+const slides = [...proof.items, ...proof.items];
+const count = proof.items.length;
+
+const reducedMotion = () => window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+// Proof: ink band. A centred quote that cross-fades in place, above a rail of sector photos
+// (active one centred, neighbours dimmed). Photos show the client's sector, labelled, never the person quoted.
 export default function Proof() {
   const [api, setApi] = useState<CarouselApi>();
-  const [index, setIndex] = useState(0);
+  const [selected, setSelected] = useState(0);
+  const active = selected % count;
 
   useEffect(() => {
     if (!api) return;
-    const update = () => setIndex(api.selectedScrollSnap());
+    const update = () => setSelected(api.selectedScrollSnap());
     update();
     api.on("select", update);
     return () => {
@@ -22,50 +32,84 @@ export default function Proof() {
     };
   }, [api]);
 
-  return (
-    <section id="proof" className="section">
-      <div className="wrap grid gap-12 lg:grid-cols-12 lg:gap-16">
-        <div className="min-w-0 lg:col-span-4">
-          <SectionHeading eyebrow={proof.eyebrow} title={proof.title} />
-          <div className="mt-10 flex items-center gap-3" data-reveal>
-            <Button variant="outline" size="icon" className="size-14 rounded-full hover:border-primary hover:text-primary" onClick={() => api?.scrollPrev()} aria-label={proof.prev}>
-              <ArrowLeft className="size-5" />
-            </Button>
-            <Button variant="outline" size="icon" className="size-14 rounded-full hover:border-primary hover:text-primary" onClick={() => api?.scrollNext()} aria-label={proof.next}>
-              <ArrowRight className="size-5" />
-            </Button>
-            <div className="ml-3 flex gap-2" aria-hidden>
-              {proof.items.map((p, i) => (
-                <span key={p.org} className={cn("h-1.5 rounded-full bg-primary transition-all duration-500", i === index ? "w-10" : "w-3 opacity-30")} />
-              ))}
-            </div>
-          </div>
-        </div>
+  const go = (dir: -1 | 1) => api?.scrollTo((selected + dir + slides.length) % slides.length, reducedMotion());
 
-        <div className="min-w-0 lg:col-span-8" data-reveal>
-          <Carousel setApi={setApi} opts={{ loop: true }}>
-            <CarouselContent>
-              {proof.items.map((p) => (
-                <CarouselItem key={p.org}>
-                  <figure className="flex min-h-[26rem] flex-col justify-between rounded-[2rem] bg-ink p-8 text-white sm:p-12">
-                    <div className="flex items-center gap-3">
-                      <span className="flex gap-0.5 text-gold" aria-hidden>
-                        {Array.from({ length: 5 }).map((_, i) => (
-                          <Star key={i} className="size-5 fill-current" />
-                        ))}
-                      </span>
-                      <span className="text-sm text-white/60">{proof.rating}</span>
-                    </div>
-                    <blockquote className="font-heading text-[clamp(1.75rem,3vw,2.75rem)] leading-[1.2]">&ldquo;{p.quote}&rdquo;</blockquote>
-                    <figcaption className="border-t border-white/15 pt-5">
-                      <span className="font-semibold">{p.who}</span>
-                      <span className="text-white/60">, {p.org}</span>
-                    </figcaption>
-                  </figure>
-                </CarouselItem>
+  return (
+    <section id="proof" aria-labelledby="proof-title" className="section overflow-hidden bg-ink text-white">
+      <div className="wrap">
+        <SectionHeading id="proof-title" eyebrow={proof.eyebrow} title={proof.title} dark center />
+
+        <div className="mx-auto mt-(--title-gap) max-w-3xl text-center">
+          <Quote aria-hidden className="mx-auto size-10 rotate-180 fill-current text-gold" strokeWidth={0} />
+          <div className="mt-6 grid" aria-live="polite">
+            {proof.items.map((p, i) => (
+              <figure
+                key={p.org}
+                aria-hidden={i !== active}
+                className={cn(
+                  "col-start-1 row-start-1 transition-opacity duration-(--duration-base) ease-(--ease-out)",
+                  i === active ? "opacity-100" : "invisible opacity-0",
+                )}
+              >
+                <blockquote className="t-quote text-white">&ldquo;{p.quote}&rdquo;</blockquote>
+                <figcaption className="mt-6 text-white/70">
+                  <span className="font-semibold text-white">{p.who}</span>, {p.org}
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+          <p className="mt-6 flex items-center justify-center gap-3 text-sm text-white/70">
+            <span className="flex gap-0.5 text-gold" aria-hidden>
+              {Array.from({ length: 5 }).map((_, i) => (
+                <Star key={i} className="size-4 fill-current" />
               ))}
-            </CarouselContent>
-          </Carousel>
+            </span>
+            {proof.rating}
+          </p>
+        </div>
+      </div>
+
+      <div className="relative mx-auto mt-12 max-w-[calc(var(--container)+2*var(--gutter))]">
+        <Carousel setApi={setApi} opts={{ loop: true, align: "center", duration: 24 }}>
+          <CarouselContent className="-ml-5">
+            {slides.map((p, i) => {
+              const on = i === selected;
+              return (
+                <CarouselItem key={`${p.org}-${i}`} aria-hidden={!on} className="basis-[68%] pl-5 sm:basis-[44%] lg:basis-[30%]">
+                  <div
+                    className={cn(
+                      "relative aspect-[4/5] overflow-hidden rounded-(--radius) transition-[opacity,scale] duration-(--duration-base) ease-(--ease-out)",
+                      on ? "opacity-100" : "scale-95 opacity-40",
+                    )}
+                  >
+                    <Image src={p.image} alt={on ? p.alt : ""} fill sizes="(min-width: 1024px) 26rem, (min-width: 640px) 44vw, 68vw" className="object-cover" />
+                    <span className="absolute bottom-4 left-4 rounded-full bg-ink/80 px-3 py-1.5 text-sm font-medium text-white">{p.sector}</span>
+                  </div>
+                </CarouselItem>
+              );
+            })}
+          </CarouselContent>
+        </Carousel>
+
+        <div className="pointer-events-none absolute inset-x-0 top-1/2 flex -translate-y-1/2 justify-between px-(--gutter) sm:justify-center sm:gap-[calc(44%+1rem)] lg:gap-[calc(30%+3rem)]">
+          <Button
+            variant="outline"
+            size="icon"
+            className="pointer-events-auto size-11 border-white/30 bg-ink/60 text-white hover:border-white hover:text-white"
+            onClick={() => go(-1)}
+            aria-label={proof.prev}
+          >
+            <ArrowLeft className="size-5" strokeWidth={1.5} aria-hidden />
+          </Button>
+          <Button
+            variant="outline"
+            size="icon"
+            className="pointer-events-auto size-11 border-white/30 bg-ink/60 text-white hover:border-white hover:text-white"
+            onClick={() => go(1)}
+            aria-label={proof.next}
+          >
+            <ArrowRight className="size-5" strokeWidth={1.5} aria-hidden />
+          </Button>
         </div>
       </div>
     </section>

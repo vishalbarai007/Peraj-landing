@@ -1,74 +1,96 @@
 "use client";
 
-import { useRef } from "react";
-import { useGSAP } from "@gsap/react";
-import { gsap } from "@/lib/gsap";
+import { useState } from "react";
+import Image from "next/image";
+import { ArrowLeft, ArrowRight } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import MaskReveal from "@/components/motion/MaskReveal";
+import SectionHeading from "@/components/SectionHeading";
 import { legacy } from "@/content/site";
 import { cn } from "@/lib/utils";
 
-// The page's single pinned scene: the timeline scrolls sideways while the page is pinned.
-// Below lg, or with reduced motion, it is a native swipe row.
-export default function Legacy() {
-  const root = useRef<HTMLElement>(null);
-  const track = useRef<HTMLDivElement>(null);
-  const bar = useRef<HTMLSpanElement>(null);
+const items = legacy.milestones;
+const pad = (n: number) => String(n).padStart(2, "0");
+const fade = "transition-opacity duration-(--duration-base) ease-(--ease-out)";
 
-  useGSAP(
-    () => {
-      const mm = gsap.matchMedia();
-      mm.add("(min-width: 1024px) and (prefers-reduced-motion: no-preference)", () => {
-        const t = track.current;
-        if (!t) return;
-        const distance = () => t.scrollWidth - window.innerWidth + 120;
-        gsap.to(t, {
-          x: () => -distance(),
-          ease: "none",
-          scrollTrigger: {
-            trigger: root.current,
-            start: "top top",
-            end: () => `+=${distance()}`,
-            pin: true,
-            scrub: 0.6,
-            invalidateOnRefresh: true,
-            onUpdate: (self) => {
-              if (bar.current) bar.current.style.transform = `scaleX(${self.progress})`;
-            },
-          },
-        });
-      });
-    },
-    { scope: root },
-  );
+// Legacy layout A as a timeline carousel: photo (5 cols) beside the heading, a year rail, the active
+// milestone and prev/next arrows (7 cols). Photo and text cross-fade in place; nothing changes size.
+export default function Legacy() {
+  const [active, setActive] = useState(0);
+  const step = (dir: -1 | 1) => setActive((i) => (i + dir + items.length) % items.length);
 
   return (
-    <section id="legacy" ref={root} className="overflow-hidden bg-ink text-white lg:h-screen">
-      <div className="flex flex-col justify-center py-20 lg:h-full lg:py-0">
-        <div className="wrap w-full">
-          <p className="t-eyebrow text-gold">{legacy.eyebrow}</p>
-          <h2 className="t-h2 mt-4 max-w-3xl text-white">{legacy.title}</h2>
-          <div className="mt-8 hidden h-px w-full bg-white/15 lg:block">
-            <span ref={bar} className="block h-px origin-left scale-x-0 bg-gold" />
-          </div>
-        </div>
-        <div
-          ref={track}
-          className="mt-10 flex snap-x gap-5 overflow-x-auto px-[clamp(1.25rem,4vw,4rem)] pb-4 lg:w-max lg:snap-none lg:overflow-visible lg:pb-0 lg:pr-[10vw]"
-        >
-          {legacy.milestones.map((m) => (
-            <article
+    <section id="legacy" aria-labelledby="legacy-title" className="section bg-mist">
+      <div className="wrap grid items-center gap-12 lg:grid-cols-12 lg:gap-16">
+        <MaskReveal className="card-surface relative aspect-[4/5] overflow-hidden lg:col-span-5">
+          {items.map((m, i) => (
+            <Image
               key={m.year}
-              className={cn(
-                "group relative flex h-[24rem] w-[82vw] shrink-0 snap-center flex-col justify-between overflow-hidden rounded-3xl border p-8 transition-colors duration-500 sm:w-[28rem] lg:h-[26rem] lg:w-[30rem]",
-                m.real ? "border-gold/40 bg-white/5 hover:bg-white/10" : "border-dashed border-white/20 hover:border-gold/50",
-              )}
-            >
-              <p className={cn("t-h1 transition-transform duration-500 group-hover:-translate-y-1", m.real ? "text-gold" : "text-outline")}>{m.year}</p>
-              <div>
-                <h3 className="t-h3">{m.real ? m.title : legacy.placeholderTitle}</h3>
-                <p className="mt-3 text-white/70">{m.real ? m.text : legacy.placeholderBody}</p>
-              </div>
-            </article>
+              data-mask-img
+              src={m.image}
+              alt={i === active ? m.alt : ""}
+              fill
+              sizes="(min-width: 1024px) 40vw, 100vw"
+              className={cn("object-cover", fade, i === active ? "opacity-100" : "opacity-0")}
+            />
           ))}
+        </MaskReveal>
+
+        <div className="lg:col-span-7">
+          <SectionHeading id="legacy-title" eyebrow={legacy.eyebrow} title={legacy.title} />
+
+          <ol className="mt-(--title-gap) grid grid-cols-5 border-t border-border">
+            {items.map((m, i) => (
+              <li key={m.year}>
+                <button
+                  type="button"
+                  aria-current={i === active ? "step" : undefined}
+                  onClick={() => setActive(i)}
+                  className={cn(
+                    "relative -mt-px flex min-h-11 w-full items-end border-t-2 pt-3 text-sm font-semibold tabular-nums transition-colors duration-(--duration-fast)",
+                    i === active ? "border-primary text-primary" : "border-transparent text-muted-foreground hover:text-navy",
+                  )}
+                >
+                  {m.year}
+                </button>
+              </li>
+            ))}
+          </ol>
+
+          <div className="mt-8 grid" aria-live="polite">
+            {items.map((m, i) => (
+              <article
+                key={m.year}
+                aria-hidden={i !== active}
+                className={cn("col-start-1 row-start-1", fade, i === active ? "opacity-100" : "invisible opacity-0")}
+              >
+                <div className="flex flex-wrap items-center gap-3">
+                  <p className="t-figure text-primary">{m.year}</p>
+                  {"placeholder" in m && (
+                    <span className="rounded-full border border-dashed border-navy/30 px-3 py-1 text-sm text-muted-foreground">
+                      {legacy.placeholderBadge}
+                    </span>
+                  )}
+                </div>
+                <h3 className="t-h3 mt-4 text-navy">{m.title}</h3>
+                <p className="mt-2 max-w-xl text-muted-foreground">{m.text}</p>
+              </article>
+            ))}
+          </div>
+
+          <div className="mt-8 flex items-center justify-between gap-4 border-t border-border pt-6">
+            <p className="t-caption tabular-nums">
+              {pad(active + 1)} / {pad(items.length)}
+            </p>
+            <div className="flex gap-2">
+              <Button variant="outline" size="icon" className="size-11" onClick={() => step(-1)} aria-label={legacy.prev}>
+                <ArrowLeft className="size-5" strokeWidth={1.5} aria-hidden />
+              </Button>
+              <Button variant="outline" size="icon" className="size-11" onClick={() => step(1)} aria-label={legacy.next}>
+                <ArrowRight className="size-5" strokeWidth={1.5} aria-hidden />
+              </Button>
+            </div>
+          </div>
         </div>
       </div>
     </section>

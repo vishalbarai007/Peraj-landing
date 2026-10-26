@@ -11,7 +11,7 @@ type Status = "idle" | "sending" | "done" | "error";
 type Errors = Partial<Record<keyof Lead, string>>;
 
 const fieldClass =
-  "h-12 w-full rounded-xl border border-input bg-background px-4 text-base text-foreground placeholder:text-muted-foreground/70 transition-colors focus-visible:border-primary focus-visible:ring-3 focus-visible:ring-primary/25 focus-visible:outline-none aria-invalid:border-destructive";
+  "h-12 w-full rounded-(--radius) border border-input bg-background px-4 text-base text-foreground placeholder:text-muted-foreground/70 transition-colors focus-visible:border-primary focus-visible:ring-3 focus-visible:ring-primary/25 focus-visible:outline-none aria-invalid:border-destructive";
 
 function validate(lead: Lead): Errors {
   const e: Errors = {};
@@ -67,7 +67,7 @@ export default function LeadForm({ id }: { id: string }) {
         <CheckCircle2 className="size-12 text-primary" aria-hidden />
         <h3 className="t-h3 text-navy">{t.successTitle}</h3>
         <p className="max-w-xs text-sm text-muted-foreground">{t.successText}</p>
-        <Button variant="outline" className="mt-2 h-11 rounded-full px-6" onClick={() => setStatus("idle")}>
+        <Button variant="outline" size="lg" className="mt-2" onClick={() => setStatus("idle")}>
           {t.again}
         </Button>
       </div>
@@ -103,7 +103,7 @@ export default function LeadForm({ id }: { id: string }) {
       <Field id={f("message")} label={t.message}>
         <textarea id={f("message")} name="message" rows={3} placeholder={t.messagePh} className={cn(fieldClass, "h-auto resize-none py-3")} />
       </Field>
-      <Button type="submit" disabled={status === "sending"} className="h-12 rounded-full text-base font-semibold hover:bg-teal-deep">
+      <Button type="submit" size="lg" disabled={status === "sending"} className="w-full">
         {status === "sending" ? (
           <>
             <Loader2 className="animate-spin" aria-hidden /> {t.sending}
@@ -117,7 +117,7 @@ export default function LeadForm({ id }: { id: string }) {
           {t.failed}
         </p>
       )}
-      <p className="text-center text-xs text-muted-foreground">{t.privacy}</p>
+      <p className="t-caption text-center">{t.privacy}</p>
     </form>
   );
 }

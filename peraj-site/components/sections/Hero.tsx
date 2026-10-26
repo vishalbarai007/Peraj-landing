@@ -1,58 +1,46 @@
-import { ArrowRight, ShieldCheck } from "lucide-react";
+import { ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import Magnetic from "@/components/motion/Magnetic";
-import { cta, hero, marquee } from "@/content/site";
-import HeroVisual from "./HeroVisual";
-import RotatingWord from "./RotatingWord";
+import CtaButton from "@/components/CtaButton";
+import HeroEntrance from "@/components/motion/HeroEntrance";
+import { cta, hero } from "@/content/site";
+import HeroPanel from "./HeroPanel";
 
 export default function Hero() {
-  const loop = [...marquee, ...marquee];
   return (
-    <section id="top" className="relative overflow-hidden bg-gradient-to-b from-mint/60 via-white to-white pt-28 lg:pt-32">
-      <div aria-hidden data-parallax="90" className="pointer-events-none absolute -top-40 -right-40 size-[44rem] rounded-full bg-primary/15 blur-3xl" />
-      <div aria-hidden data-parallax="60" className="pointer-events-none absolute top-1/3 -left-40 size-[28rem] rounded-full bg-gold/15 blur-3xl" />
-
-      <div className="wrap relative grid items-center gap-10 pb-16 lg:grid-cols-12 lg:gap-8 lg:pb-24">
+    <section id="top" aria-labelledby="hero-title" className="bg-background pt-28 pb-(--section-y) lg:pt-36">
+      <HeroEntrance className="wrap grid items-center gap-12 lg:grid-cols-12 lg:gap-16">
         <div className="lg:col-span-7">
-          <p className="t-eyebrow" data-reveal>{hero.eyebrow}</p>
-          <h1 className="t-h1 mt-6 text-navy">
-            <span className="block">{hero.titleLead}</span>
-            <span className="block">{hero.titleTail}</span>
-            <span className="block">
-              <RotatingWord words={hero.rotating} />
-            </span>
+          <p className="t-eyebrow flex items-center gap-3" data-hero-copy data-hero-hide>
+            <span aria-hidden className="size-1.5 shrink-0 rounded-full bg-gold" />
+            {hero.eyebrow}
+          </p>
+          <h1 id="hero-title" className="t-h1 mt-6 text-navy" data-hero-hide>
+            {[hero.titleLead, hero.titleTail].map((line) => (
+              <span key={line} className="block overflow-hidden pb-[0.08em]">
+                <span className="block" data-hero-line>
+                  {line}
+                </span>
+              </span>
+            ))}
           </h1>
-          <p className="t-lead mt-8 max-w-xl" data-reveal data-delay="0.2">{hero.sub}</p>
-          <div className="mt-10 flex flex-wrap items-center gap-4" data-reveal data-delay="0.3">
-            <Magnetic>
-              <Button nativeButton={false} render={<a href="#contact" />} className="group h-14 rounded-full px-8 text-base font-semibold hover:bg-teal-deep">
-                {cta.primary}
-                <ArrowRight className="transition-transform duration-300 group-hover:translate-x-1" aria-hidden />
-              </Button>
-            </Magnetic>
-            <Button nativeButton={false} render={<a href="#legacy" />} variant="outline" className="h-14 rounded-full px-8 text-base font-semibold hover:border-primary hover:text-primary">
+          <p className="t-lead mt-6 max-w-xl" data-hero-copy data-hero-hide>
+            {hero.sub}
+          </p>
+          <div className="mt-10 flex flex-wrap gap-3" data-hero-copy data-hero-hide>
+            <CtaButton />
+            <Button size="lg" variant="outline" nativeButton={false} render={<a href="#legacy" />}>
               {cta.secondary}
             </Button>
           </div>
-          <p className="mt-8 flex items-center gap-2 text-sm text-muted-foreground" data-reveal data-delay="0.4">
-            <ShieldCheck className="size-5 text-primary" aria-hidden /> {hero.badge}
+          <p className="t-caption mt-8 flex items-center gap-2" data-hero-copy data-hero-hide>
+            <ShieldCheck aria-hidden className="size-5 text-primary" strokeWidth={1.5} />
+            {hero.badge}
           </p>
         </div>
         <div className="lg:col-span-5">
-          <HeroVisual />
+          <HeroPanel />
         </div>
-      </div>
-
-      <div className="relative overflow-hidden border-y border-border bg-white/70 py-5 backdrop-blur" aria-hidden>
-        <div className="flex w-max animate-marquee gap-12 pr-12 whitespace-nowrap">
-          {loop.map((m, i) => (
-            <span key={i} className="flex items-center gap-12 font-heading text-2xl text-navy/70">
-              {m}
-              <span className="size-1.5 rounded-full bg-gold" />
-            </span>
-          ))}
-        </div>
-      </div>
+      </HeroEntrance>
     </section>
   );
 }

@@ -1,67 +1,37 @@
-"use client";
-
-import { useState } from "react";
-import { AlertTriangle, Gavel, Percent, ShieldCheck } from "lucide-react";
+import { ArrowRight, Check } from "lucide-react";
+import SectionHeading from "@/components/SectionHeading";
 import { pitfalls } from "@/content/site";
-import { cn } from "@/lib/utils";
 
-const icons = [AlertTriangle, Gavel, Percent];
-
+// Pitfalls layout A: one ruled row per pitfall. Title, the problem, then the Peraj fix on a mint tile. All visible.
 export default function Pitfalls() {
-  const [flipped, setFlipped] = useState<number | null>(null);
-
   return (
-    <div className="mt-24">
-      <div className="flex flex-wrap items-end justify-between gap-4" data-reveal>
-        <div>
-          <p className="t-eyebrow">{pitfalls.eyebrow}</p>
-          <h3 className="t-h2 mt-4 max-w-2xl text-navy">{pitfalls.title}</h3>
-        </div>
-        <p className="text-sm text-muted-foreground">{pitfalls.hint}</p>
+    <section id="pitfalls" aria-labelledby="pitfalls-title" className="section bg-background">
+      <div className="wrap">
+        <SectionHeading id="pitfalls-title" eyebrow={pitfalls.eyebrow} title={pitfalls.title} />
+
+        <ol className="mt-(--title-gap) border-t border-border">
+          {pitfalls.items.map((p, i) => (
+            <li key={p.title} className="grid gap-5 border-b border-border py-8 lg:grid-cols-12 lg:items-center lg:gap-8">
+              <div className="flex items-baseline gap-4 lg:col-span-3">
+                <span className="t-caption tabular-nums">{String(i + 1).padStart(2, "0")}</span>
+                <h3 className="t-h3 text-navy">{p.title}</h3>
+              </div>
+              <div className="lg:col-span-4">
+                <p className="t-caption font-medium">{pitfalls.problemLabel}</p>
+                <p className="mt-1 text-muted-foreground">{p.problem}</p>
+              </div>
+              <ArrowRight aria-hidden strokeWidth={1.5} className="hidden size-5 justify-self-center text-muted-foreground lg:col-span-1 lg:block" />
+              <div className="rounded-(--radius) bg-mint p-5 lg:col-span-4">
+                <p className="flex items-center gap-2 text-sm font-semibold text-teal-deep">
+                  <Check aria-hidden strokeWidth={2} className="size-4" />
+                  {pitfalls.fixLabel}
+                </p>
+                <p className="mt-1 text-navy">{p.fix}</p>
+              </div>
+            </li>
+          ))}
+        </ol>
       </div>
-      <div className="mt-10 grid gap-5 md:grid-cols-3" data-stagger>
-        {pitfalls.items.map((p, i) => {
-          const Icon = icons[i];
-          const on = flipped === i;
-          return (
-            <button
-              key={p.title}
-              type="button"
-              aria-pressed={on}
-              onClick={() => setFlipped(on ? null : i)}
-              className="group h-80 text-left [perspective:1200px] focus-visible:outline-none"
-            >
-              <span
-                className={cn(
-                  "relative block size-full rounded-3xl transition-transform duration-700 [transform-style:preserve-3d] group-focus-visible:ring-3 group-focus-visible:ring-primary/40 md:group-hover:[transform:rotateY(180deg)]",
-                  on && "[transform:rotateY(180deg)]",
-                )}
-              >
-                <span className="absolute inset-0 flex flex-col justify-between rounded-3xl border border-border bg-mist p-8 [backface-visibility:hidden]">
-                  <span className="flex size-14 items-center justify-center rounded-full bg-white text-gold shadow-sm">
-                    <Icon className="size-7" aria-hidden />
-                  </span>
-                  <span>
-                    <span className="t-eyebrow text-muted-foreground">{pitfalls.problemLabel}</span>
-                    <span className="t-h3 mt-3 block text-navy">{p.title}</span>
-                    <span className="mt-3 block text-muted-foreground">{p.problem}</span>
-                  </span>
-                </span>
-                <span className="absolute inset-0 flex flex-col justify-between rounded-3xl bg-ink p-8 text-white [backface-visibility:hidden] [transform:rotateY(180deg)]">
-                  <span className="flex size-14 items-center justify-center rounded-full bg-primary text-white">
-                    <ShieldCheck className="size-7" aria-hidden />
-                  </span>
-                  <span>
-                    <span className="t-eyebrow text-gold">{pitfalls.fixLabel}</span>
-                    <span className="t-h3 mt-3 block">{p.title}</span>
-                    <span className="mt-3 block text-white/75">{p.fix}</span>
-                  </span>
-                </span>
-              </span>
-            </button>
-          );
-        })}
-      </div>
-    </div>
+    </section>
   );
 }

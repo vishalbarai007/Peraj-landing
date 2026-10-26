@@ -1,4 +1,3 @@
-import Animations from "@/components/motion/Animations";
 import FloatingCta from "@/components/FloatingCta";
 import Nav from "@/components/Nav";
 import Contact from "@/components/sections/Contact";
@@ -7,6 +6,7 @@ import Footer from "@/components/sections/Footer";
 import Hero from "@/components/sections/Hero";
 import Industries from "@/components/sections/Industries";
 import Legacy from "@/components/sections/Legacy";
+import Pitfalls from "@/components/sections/Pitfalls";
 import Process from "@/components/sections/Process";
 import Proof from "@/components/sections/Proof";
 import Solutions from "@/components/sections/Solutions";
@@ -23,6 +23,7 @@ export default function Home() {
       <main id="main">
         <Hero />
         <Why />
+        <Pitfalls />
         <Legacy />
         <Solutions />
         <Process />
@@ -33,7 +34,6 @@ export default function Home() {
       </main>
       <Footer />
       <FloatingCta />
-      <Animations />
     </>
   );
 }

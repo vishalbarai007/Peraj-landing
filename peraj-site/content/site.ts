@@ -16,7 +16,6 @@ export const site = {
 export const cta = {
   primary: "Request a callback",
   secondary: "Explore our legacy",
-  inquire: "Inquire coverage",
 };
 
 export const nav = [
@@ -31,39 +30,19 @@ export const nav = [
 export const hero = {
   eyebrow: "Commercial insurance & advisory · Since 1951",
   titleLead: "Built on trust.",
-  titleTail: "Shaped around",
-  rotating: ["people.", "founders.", "families.", "businesses."],
+  // Static per brief MO-1 (subtle): "people." is the first word of the client's rotating list.
+  titleTail: "Shaped around people.",
   sub: "For over 70 years Peraj has structured and defended insurance for businesses and the people behind them, as a fiduciary partner, not a salesperson.",
   badge: "IRDAI registered · Broker License No. 182",
-  cards: {
-    claim: { label: "Claim settled", text: "No arbitrary deductions" },
-    ring: { value: 99.8, label: "Claims satisfaction" },
-    callback: { label: "Callback within", value: "2 hrs" },
-    audit: {
-      title: "Policy health audit",
-      rows: [
-        { name: "Property", ok: true },
-        { name: "Liability", ok: true },
-        { name: "Cyber", ok: false },
-        { name: "Directors & officers", ok: true },
-      ],
-      gap: "1 gap found",
-    },
+  image: {
+    src: "/media/hero.webp",
+    alt: "A Peraj adviser talking a business client through their cover in a city office",
   },
+  stats: [
+    { value: "99.8%", label: "Claims satisfaction" },
+    { value: "2 hrs", label: "Callback within" },
+  ],
 };
-
-export const marquee = [
-  "Industrial All Risks",
-  "Contractor All Risk",
-  "General Liability",
-  "Directors & Officers",
-  "Cyber & Data",
-  "Group Medical",
-  "Executive Term Life",
-  "Product Recall",
-  "Pollution Liability",
-  "Master-Local DIC/DIL",
-];
 
 export const why = {
   eyebrow: "Why Peraj",
@@ -80,7 +59,6 @@ export const why = {
 export const pitfalls = {
   eyebrow: "Standard policy pitfalls",
   title: "Where policies quietly fail people.",
-  hint: "Tap a card to see how we fix it.",
   problemLabel: "The problem",
   fixLabel: "The Peraj fix",
   items: [
@@ -105,27 +83,57 @@ export const pitfalls = {
 export const legacy = {
   eyebrow: "Advisory legacy",
   title: "Founded on a simple idea: advise first.",
-  placeholderBody: "Milestone details to be supplied by Peraj.", // TODO(placeholder)
-  placeholderTitle: "Chapter title to come", // TODO(placeholder)
+  prev: "Previous milestone",
+  next: "Next milestone",
+  placeholderBadge: "Content to come",
+  // Era photos (1952 onward) are stock atmosphere, not Peraj's own archive.
   milestones: [
     {
       year: "1951",
       title: "The foundation of fiduciary advisory",
       text: "Shri Mulji Peraj founded the firm and quickly obtained an agency license from the Controller of Insurance, setting an early standard for integrity before nationalization.",
-      real: true,
+      image: "/media/legacy.webp",
+      alt: "Mumbai's Gothic heritage civic buildings, the city where Peraj was founded in 1951",
     },
-    { year: "1952", real: false },
-    { year: "1970", real: false },
-    { year: "1978", real: false },
-    { year: "2002", real: false },
+    // TODO(placeholder): dummy text until Peraj supplies these milestones.
+    {
+      year: "1952",
+      title: "Milestone title to be supplied",
+      text: "Placeholder: Peraj to supply what happened in 1952.",
+      image: "/media/legacy-1952.webp",
+      alt: "A vintage typewriter on a writer's desk",
+      placeholder: true,
+    },
+    {
+      year: "1970",
+      title: "Milestone title to be supplied",
+      text: "Placeholder: Peraj to supply what happened in 1970.",
+      image: "/media/legacy-1970.webp",
+      alt: "An old colonial street in Mumbai",
+      placeholder: true,
+    },
+    {
+      year: "1978",
+      title: "Milestone title to be supplied",
+      text: "Placeholder: Peraj to supply what happened in 1978.",
+      image: "/media/legacy-1978.webp",
+      alt: "Wooden archive drawers of index cards",
+      placeholder: true,
+    },
+    {
+      year: "2002",
+      title: "Milestone title to be supplied",
+      text: "Placeholder: Peraj to supply what happened in 2002.",
+      image: "/media/legacy-2002.webp",
+      alt: "A modern glass office tower",
+      placeholder: true,
+    },
   ],
 };
 
 export const solutions = {
   eyebrow: "Risk solutions",
   title: "Cover designed around how you work.",
-  prev: "Previous solution",
-  next: "Next solution",
   items: [
     { icon: "building", title: "Property & Physical Assets", text: "Industrial All Risks cover that includes business interruption." },
     { icon: "hardhat", title: "Capital Projects & EPC Risk", text: "Erection and Contractor All Risk cover with delay-in-startup protection." },
@@ -151,26 +159,27 @@ export const industries = {
   eyebrow: "Industries we serve",
   title: "Deep knowledge of the sectors that move the economy.",
   items: [
-    { icon: "factory", title: "Industrials, Manufacturing & Advanced Engineering" },
-    { icon: "construction", title: "Infrastructure, Construction & Capital Projects" },
-    { icon: "zap", title: "Energy, Power, Utilities & Natural Resources" },
-    { icon: "truck", title: "Transportation, Mobility & Global Logistics" },
-    { icon: "landmark", title: "Financial Institutions & Capital Markets" },
-    { icon: "cpu", title: "Technology, Telecom & Digital Infrastructure" },
+    { icon: "factory", title: "Industrials, Manufacturing & Advanced Engineering", image: "/media/industry-industrials.webp", alt: "Engineer operating machinery on a factory floor" },
+    { icon: "construction", title: "Infrastructure, Construction & Capital Projects", image: "/media/industry-infrastructure.webp", alt: "Tower crane over a construction site in an Indian city" },
+    { icon: "zap", title: "Energy, Power, Utilities & Natural Resources", image: "/media/industry-energy.webp", alt: "Engineer with a tablet at a solar power plant" },
+    { icon: "truck", title: "Transportation, Mobility & Global Logistics", image: "/media/industry-logistics.webp", alt: "Gantry cranes and shipping containers at a port" },
+    { icon: "landmark", title: "Financial Institutions & Capital Markets", image: "/media/industry-financial.webp", alt: "Office towers of Mumbai's Lower Parel business district" },
+    { icon: "cpu", title: "Technology, Telecom & Digital Infrastructure", image: "/media/industry-technology.webp", alt: "Technician checking server racks in a data centre" },
   ],
 };
 
 export const proof = {
   eyebrow: "Enterprise proof",
   title: "Trusted when it matters most: at claim time.",
-  rating: "Fiduciary rating 5.0",
+  rating: "Fiduciary rating 5.0", // TODO(verify): source not stated in client material
   prev: "Previous testimonial",
   next: "Next testimonial",
   // TODO(verify): wording paraphrased from the client site, confirm exact quotes and permission.
+  // Photos show the client's sector, not the person quoted; each slide carries a visible sector label.
   items: [
-    { quote: "After a machinery breakdown our claim was settled fast, with no arbitrary deductions.", who: "CFO", org: "Global engineering conglomerate" },
-    { quote: "Their risk reviews have saved us money year after year and rebuilt our clinical trial and product liability programs.", who: "COO", org: "Multinational pharmaceutical company" },
-    { quote: "Strong on technology E&O, cyber and board governance. They understand how we actually work.", who: "Managing Director", org: "Cloud & cyber platform" },
+    { quote: "After a machinery breakdown our claim was settled fast, with no arbitrary deductions.", who: "CFO", org: "Global engineering conglomerate", sector: "Engineering", image: "/media/proof-industrials.webp", alt: "Engineering sector: an engineer at work on a factory floor" },
+    { quote: "Their risk reviews have saved us money year after year and rebuilt our clinical trial and product liability programs.", who: "COO", org: "Multinational pharmaceutical company", sector: "Pharmaceuticals", image: "/media/proof-pharma.webp", alt: "Pharmaceutical sector: a scientist working in a laboratory" },
+    { quote: "Strong on technology E&O, cyber and board governance. They understand how we actually work.", who: "Managing Director", org: "Cloud & cyber platform", sector: "Cloud & cyber", image: "/media/proof-technology.webp", alt: "Technology sector: technicians checking server racks in a data centre" },
   ],
 };
 
@@ -193,7 +202,6 @@ export const contact = {
   title: "Your protection starts with a conversation.",
   lead: "Request a callback and receive a complimentary Policy Health Review. No pressure, no obligation.",
   promise: "Callback within 2 business hours",
-  banner: "Let's talk",
   formTitle: "Request a callback",
   dialogDescription: "Tell us a little. A senior adviser calls you back within 2 business hours.",
 };
@@ -230,9 +238,8 @@ export const form = {
   ],
 };
 
-export const floating = { label: "Get a callback" };
-
 export const footer = {
+  // Not rendered: the footer CTA band was dropped (Contact is the closing CTA). Kept as client copy by user choice.
   cta: "What are you protecting?",
   ctaSub: "Tell us, and we will build the cover around it.",
   explore: "Explore",
@@ -248,5 +255,4 @@ export const footer = {
     { label: "IRDAI Disclosures", href: "#" }, // TODO(placeholder)
   ],
   top: "Back to top",
-  wordmark: "PERAJ",
 };

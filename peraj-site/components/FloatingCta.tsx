@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { PhoneCall } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
-import { contact, floating } from "@/content/site";
+import { contact, cta } from "@/content/site";
 import { cn } from "@/lib/utils";
 import LeadForm from "./LeadForm";
 
@@ -24,17 +24,18 @@ export default function FloatingCta() {
       <DialogTrigger
         render={
           <Button
+            size="lg"
             className={cn(
-              "fixed right-4 bottom-4 z-40 h-12 rounded-full px-5 text-sm font-semibold shadow-xl shadow-ink/20 transition-all duration-500 hover:bg-teal-deep sm:right-8 sm:bottom-8",
-              show ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-6 opacity-0",
+              "fixed right-4 bottom-4 z-40 shadow-lg shadow-ink/15 transition-[opacity,translate,background-color] duration-(--duration-base) ease-(--ease-out) sm:right-8 sm:bottom-8",
+              show ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-4 opacity-0",
             )}
             tabIndex={show ? 0 : -1}
           />
         }
       >
-        <PhoneCall aria-hidden /> {floating.label}
+        <PhoneCall aria-hidden strokeWidth={1.5} /> {cta.primary}
       </DialogTrigger>
-      <DialogContent className="max-h-[92vh] overflow-y-auto rounded-3xl p-6 sm:max-w-xl sm:p-8">
+      <DialogContent className="max-h-[92dvh] overflow-y-auto rounded-(--radius) p-6 sm:max-w-xl sm:p-8">
         <DialogHeader>
           <DialogTitle className="t-h3 text-navy">{contact.formTitle}</DialogTitle>
           <DialogDescription>{contact.dialogDescription}</DialogDescription>
