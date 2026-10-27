@@ -3,25 +3,25 @@
 @import "shadcn/tailwind.css";
 
 :root {
-  /* Palette: green #133215, lime #92B775, beige #F3E8D3. Tints are mixes of these. */
-  --background: #faf5ea;
-  --foreground: #133215;
+  /* Palette: cream #FFFCEF, navy #1E3157, cyan #00AEEF, text #3D3D3D. Tints are mixes of these. */
+  --background: #fffcef;
+  --foreground: #3d3d3d;
   --card: rgb(255 255 255 / 0.55);
-  --card-foreground: #133215;
-  --popover: #faf5ea;
-  --popover-foreground: #133215;
-  --primary: #133215;
-  --primary-foreground: #f3e8d3;
-  --secondary: #e4ebd2;
-  --secondary-foreground: #133215;
-  --muted: #f3e8d3;
-  --muted-foreground: #4a5f4c;
-  --accent: #e4ebd2;
-  --accent-foreground: #133215;
+  --card-foreground: #3d3d3d;
+  --popover: #fffcef;
+  --popover-foreground: #3d3d3d;
+  --primary: #00aeef;
+  --primary-foreground: #1e3157;
+  --secondary: #def2ef;
+  --secondary-foreground: #1e3157;
+  --muted: #f4f2e6;
+  --muted-foreground: #5c5c5c;
+  --accent: #def2ef;
+  --accent-foreground: #1e3157;
   --destructive: #b42318;
-  --border: rgb(19 50 21 / 0.14);
-  --input: rgb(19 50 21 / 0.2);
-  --ring: #92b775;
+  --border: rgb(30 49 87 / 0.14);
+  --input: rgb(30 49 87 / 0.2);
+  --ring: #00aeef;
   --radius: 0.75rem;
 
   /* Layout tokens: one container, one section rhythm, one title-to-content gap. */
@@ -35,14 +35,14 @@
   --duration-base: 500ms;
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
 
-  --ink: #133215;
-  --navy: #133215;
-  --teal-deep: #2a5a2e;
-  --gold: #92b775;
-  --lime: #92b775;
-  --beige: #f3e8d3;
-  --mint: #e4ebd2;
-  --mist: #f3e8d3;
+  --ink: #1e3157;
+  --navy: #1e3157;
+  --teal-deep: #00678f; /* cyan darkened for text on light surfaces */
+  --gold: #00aeef;
+  --lime: #00aeef;
+  --beige: #fffcef;
+  --mint: #def2ef;
+  --mist: #f4f2e6;
 }
 
 @theme inline {
@@ -113,7 +113,7 @@
     font-weight: 600;
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: var(--primary);
+    color: var(--teal-deep);
   }
   .t-h1 {
     font-family: var(--font-heading);

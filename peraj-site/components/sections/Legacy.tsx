@@ -48,7 +48,7 @@ export default function Legacy() {
                   onClick={() => setActive(i)}
                   className={cn(
                     "relative -mt-px flex min-h-11 w-full items-end border-t-2 pt-3 text-sm font-semibold tabular-nums transition-colors duration-(--duration-fast)",
-                    i === active ? "border-primary text-primary" : "border-transparent text-muted-foreground hover:text-navy",
+                    i === active ? "border-teal-deep text-teal-deep" : "border-transparent text-muted-foreground hover:text-navy",
                   )}
                 >
                   {m.year}
@@ -65,7 +65,7 @@ export default function Legacy() {
                 className={cn("col-start-1 row-start-1", fade, i === active ? "opacity-100" : "invisible opacity-0")}
               >
                 <div className="flex flex-wrap items-center gap-3">
-                  <p className="t-figure text-primary">{m.year}</p>
+                  <p className="t-figure text-teal-deep">{m.year}</p>
                   {"placeholder" in m && (
                     <span className="rounded-full border border-dashed border-navy/30 px-3 py-1 text-sm text-muted-foreground">
                       {legacy.placeholderBadge}

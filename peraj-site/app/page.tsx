@@ -25,7 +25,7 @@ export default function Home() {
         <Hero />
         <div
           id="after-hero"
-          className="relative z-10 -mt-px overflow-clip rounded-t-[2rem] shadow-[0_-24px_60px_-20px_rgb(19_50_21/0.35)]"
+          className="relative z-10 -mt-px overflow-clip rounded-t-[2rem] shadow-[0_-24px_60px_-20px_rgb(30_49_87/0.35)]"
         >
           <Why />
           <Pitfalls />

@@ -19,7 +19,7 @@ export default function Process() {
           <ol className="border-t border-border">
             {process.steps.map((s) => (
               <li key={s.n} data-stagger-item className="grid grid-cols-[3rem_1fr] gap-4 border-b border-border py-8 sm:grid-cols-[4rem_1fr]">
-                <span className="t-stat text-primary">{s.n}</span>
+                <span className="t-stat text-teal-deep">{s.n}</span>
                 <div>
                   <div className="flex flex-wrap items-center justify-between gap-3">
                     <h3 className="t-h3 text-navy">{s.title}</h3>

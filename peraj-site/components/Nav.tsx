@@ -35,7 +35,7 @@ export default function Nav() {
             <a
               key={n.href}
               href={n.href}
-              className="rounded-full px-3.5 py-2 text-sm font-medium text-navy/80 transition-colors duration-(--duration-fast) hover:text-primary"
+              className="rounded-full px-3.5 py-2 text-sm font-medium text-navy/80 transition-colors duration-(--duration-fast) hover:text-teal-deep"
             >
               {n.label}
             </a>

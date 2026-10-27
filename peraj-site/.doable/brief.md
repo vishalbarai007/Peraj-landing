@@ -34,8 +34,8 @@ Each decision is `ID | status | value`. Status is `decided`, `defaulted` (user s
 
 ### Colour
 - CO-1 | defaulted | Mode: light only
-- CO-2 | decided | Palette (existing brand): primary teal #007F73, primary-hover #00685E, navy (foreground) #102A43, ink #001D2D, gold #B58B45, mint surface #E6F4F1, mist surface #F7F8FA, white background #FFFFFF, muted text #5B7083
-- CO-3 | defaulted | Accent: teal for primary actions and focus; gold only for small highlights (eyebrow dots, year markers), never for text on white
+- CO-2 | decided | Palette (amended 2026-10-27): background cream #FFFCEF, text #3D3D3D, navy / ink #1E3157, primary cyan #00AEEF (fills only; navy text on it), teal-deep #00678F (cyan for text on light), mint #DEF2EF, mist #F4F2E6
+- CO-3 | defaulted | Accent: cyan for primary actions, focus and highlights on dark bands. Never cyan text on cream (fails contrast): use teal-deep
 - CO-4 | defaulted | Gradients: none. Drop the blurred blobs. Only a dark scrim over photos where text sits on them, contrast-checked
 
 ### UI elements
@@ -160,3 +160,4 @@ Section order (kept from the current page): Hero, Why, Pitfalls, Legacy, Solutio
 - 2026-10-27 | amended | Legacy becomes a milestone carousel with per-year photos and placeholder milestones (user request)
 - 2026-10-27 | built | all sections built; QA at 375/768/1024/1440: no horizontal scroll, no text under 14px, one H1, all images alt-texted, no console errors, production build clean
 - 2026-10-27 | amended | user request: palette becomes green #133215 / lime #92B775 / beige #F3E8D3 (CO-2, CO-3: lime replaces gold); semi-transparent glass surfaces allowed; hero rebuilt as copy + callback pill + blended photo (Magnific 426491486) + wavy lines + 3 sector bubbles with scroll drift (MO-1, MO-4); light scroll reveals on every section via `[data-reveal]` (ScrollReveal). Logo asset unchanged
+- 2026-10-27 | amended | user request: palette becomes cream #FFFCEF / navy #1E3157 / cyan #00AEEF / text #3D3D3D (CO-2, CO-3); gradients, dark mode and extra utilities from the supplied CSS not adopted (CO-1, CO-4 kept); old token names remapped
