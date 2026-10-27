@@ -4,7 +4,7 @@ Source originals: `client/media/stock/`. Optimised files: `public/media/`. Repla
 
 | file | slot | source | resource ID / URL | author | licence | date |
 |---|---|---|---|---|---|---|
-| hero.webp | Hero, lead photo | Magnific | 429660591 / https://www.magnific.com/premium-photo/candidate-explaining-strategic-competencies-recruiter_429660591.htm | MASTANGRAPHIC | premium, see Magnific licence | 2026-10-26 |
+| hero.webp | Hero, lead photo | Magnific | 426491486 | see Magnific | premium, see Magnific licence | 2026-10-27 |
 | legacy.webp | Legacy, heritage photo | Magnific | 40412532 / https://www.magnific.com/premium-photo/chhatrapati-shivaji_40412532.htm | user15338606 | premium, see Magnific licence | 2026-10-26 |
 | industry-industrials.webp | Industries, industrials tile | Magnific | 52329832 / https://www.magnific.com/premium-photo/male-indian-worker-special-uniform-orange-helmet-works-cnc-machine-production-pvc-windows-doors-factory_52329832.htm | anatoliy_cherkas | premium, see Magnific licence | 2026-10-26 |
 | industry-infrastructure.webp | Industries, infrastructure tile | Magnific | 85357850 / https://www.magnific.com/premium-photo/more-construction-fast-paced-economy-mumbai-india_85357850.htm | cputnam | premium, see Magnific licence | 2026-10-26 |

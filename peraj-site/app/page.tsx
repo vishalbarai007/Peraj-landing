@@ -1,3 +1,4 @@
+import ScrollReveal from "@/components/motion/ScrollReveal";
 import FloatingCta from "@/components/FloatingCta";
 import Nav from "@/components/Nav";
 import Contact from "@/components/sections/Contact";
@@ -16,24 +17,30 @@ import { site } from "@/content/site";
 export default function Home() {
   return (
     <>
-      <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[60] focus:rounded-full focus:bg-primary focus:px-5 focus:py-2 focus:text-white">
+      <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[60] focus:rounded-full focus:bg-primary focus:px-5 focus:py-2 focus:text-beige">
         {site.skip}
       </a>
       <Nav />
       <main id="main">
         <Hero />
-        <Why />
-        <Pitfalls />
-        <Legacy />
-        <Solutions />
-        <Process />
-        <Industries />
-        <Proof />
-        <Faqs />
-        <Contact />
+        <div
+          id="after-hero"
+          className="relative z-10 -mt-px overflow-clip rounded-t-[2rem] shadow-[0_-24px_60px_-20px_rgb(19_50_21/0.35)]"
+        >
+          <Why />
+          <Pitfalls />
+          <Legacy />
+          <Solutions />
+          <Process />
+          <Industries />
+          <Proof />
+          <Faqs />
+          <Contact />
+        </div>
       </main>
       <Footer />
       <FloatingCta />
+      <ScrollReveal />
     </>
   );
 }

@@ -3,24 +3,25 @@
 @import "shadcn/tailwind.css";
 
 :root {
-  --background: #ffffff;
-  --foreground: #102a43;
-  --card: #ffffff;
-  --card-foreground: #102a43;
-  --popover: #ffffff;
-  --popover-foreground: #102a43;
-  --primary: #007f73;
-  --primary-foreground: #ffffff;
-  --secondary: #e6f4f1;
-  --secondary-foreground: #102a43;
-  --muted: #f7f8fa;
-  --muted-foreground: #5b7083;
-  --accent: #e6f4f1;
-  --accent-foreground: #102a43;
+  /* Palette: green #133215, lime #92B775, beige #F3E8D3. Tints are mixes of these. */
+  --background: #faf5ea;
+  --foreground: #133215;
+  --card: rgb(255 255 255 / 0.55);
+  --card-foreground: #133215;
+  --popover: #faf5ea;
+  --popover-foreground: #133215;
+  --primary: #133215;
+  --primary-foreground: #f3e8d3;
+  --secondary: #e4ebd2;
+  --secondary-foreground: #133215;
+  --muted: #f3e8d3;
+  --muted-foreground: #4a5f4c;
+  --accent: #e4ebd2;
+  --accent-foreground: #133215;
   --destructive: #b42318;
-  --border: rgb(16 42 67 / 0.12);
-  --input: rgb(16 42 67 / 0.18);
-  --ring: #007f73;
+  --border: rgb(19 50 21 / 0.14);
+  --input: rgb(19 50 21 / 0.2);
+  --ring: #92b775;
   --radius: 0.75rem;
 
   /* Layout tokens: one container, one section rhythm, one title-to-content gap. */
@@ -34,12 +35,14 @@
   --duration-base: 500ms;
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
 
-  --ink: #001d2d;
-  --navy: #102a43;
-  --teal-deep: #00685e;
-  --gold: #b58b45;
-  --mint: #e6f4f1;
-  --mist: #f7f8fa;
+  --ink: #133215;
+  --navy: #133215;
+  --teal-deep: #2a5a2e;
+  --gold: #92b775;
+  --lime: #92b775;
+  --beige: #f3e8d3;
+  --mint: #e4ebd2;
+  --mist: #f3e8d3;
 }
 
 @theme inline {
@@ -67,6 +70,8 @@
   --color-gold: var(--gold);
   --color-mint: var(--mint);
   --color-mist: var(--mist);
+  --color-lime: var(--lime);
+  --color-beige: var(--beige);
   --font-sans: var(--font-inter), system-ui, sans-serif;
   --font-heading: var(--font-forum), Georgia, serif;
   --radius-sm: calc(var(--radius) * 0.6);
@@ -170,7 +175,24 @@
     border-radius: var(--radius);
     border: 1px solid var(--border);
     background: var(--card);
+    backdrop-filter: blur(8px);
   }
+  /* Semi-transparent surface for bars, chips and overlays. */
+  .glass {
+    background: rgb(255 255 255 / 0.6);
+    border: 1px solid rgb(255 255 255 / 0.7);
+    backdrop-filter: blur(14px);
+  }
+}
+
+/* Hero photo: whites multiply into the beige page, and the left and bottom edges fade out. */
+.hero-photo {
+  mix-blend-mode: multiply;
+  mask-image:
+    linear-gradient(to right, transparent 0, #000 30%, #000 92%, transparent 100%),
+    linear-gradient(to top, transparent 0, #000 22%),
+    linear-gradient(to bottom, transparent 0, #000 12%);
+  mask-composite: intersect;
 }
 
 /* Hero entrance: hidden only when JS runs with motion allowed (class set in layout <head>).

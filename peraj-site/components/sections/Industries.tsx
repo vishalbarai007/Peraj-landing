@@ -12,7 +12,7 @@ export default function Industries() {
 
         <ul className="mt-(--title-gap) grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {industries.items.map((it) => (
-            <li key={it.title} className="card-surface group flex flex-col overflow-hidden">
+            <li key={it.title} data-reveal className="card-surface group flex flex-col overflow-hidden">
               <div className="relative aspect-[4/3] overflow-hidden">
                 <Image
                   src={it.image}

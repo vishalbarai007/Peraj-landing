@@ -11,7 +11,7 @@ export default function Pitfalls() {
 
         <ol className="mt-(--title-gap) border-t border-border">
           {pitfalls.items.map((p, i) => (
-            <li key={p.title} className="grid gap-5 border-b border-border py-8 lg:grid-cols-12 lg:items-center lg:gap-8">
+            <li key={p.title} data-reveal className="grid gap-5 border-b border-border py-8 lg:grid-cols-12 lg:items-center lg:gap-8">
               <div className="flex items-baseline gap-4 lg:col-span-3">
                 <span className="t-caption tabular-nums">{String(i + 1).padStart(2, "0")}</span>
                 <h3 className="t-h3 text-navy">{p.title}</h3>

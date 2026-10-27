@@ -159,3 +159,4 @@ Section order (kept from the current page): Hero, Why, Pitfalls, Legacy, Solutio
 - 2026-10-27 | amended | IM-4: Proof gains sector photos; Proof rebuilt after the Lockton quote-band reference (user request)
 - 2026-10-27 | amended | Legacy becomes a milestone carousel with per-year photos and placeholder milestones (user request)
 - 2026-10-27 | built | all sections built; QA at 375/768/1024/1440: no horizontal scroll, no text under 14px, one H1, all images alt-texted, no console errors, production build clean
+- 2026-10-27 | amended | user request: palette becomes green #133215 / lime #92B775 / beige #F3E8D3 (CO-2, CO-3: lime replaces gold); semi-transparent glass surfaces allowed; hero rebuilt as copy + callback pill + blended photo (Magnific 426491486) + wavy lines + 3 sector bubbles with scroll drift (MO-1, MO-4); light scroll reveals on every section via `[data-reveal]` (ScrollReveal). Logo asset unchanged

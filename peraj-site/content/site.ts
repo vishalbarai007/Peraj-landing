@@ -28,19 +28,21 @@ export const nav = [
 ];
 
 export const hero = {
-  eyebrow: "Commercial insurance & advisory · Since 1951",
+  eyebrow: "Insurance advisory · Since 1951",
   titleLead: "Built on trust.",
-  // Static per brief MO-1 (subtle): "people." is the first word of the client's rotating list.
   titleTail: "Shaped around people.",
-  sub: "For over 70 years Peraj has structured and defended insurance for businesses and the people behind them, as a fiduciary partner, not a salesperson.",
+  sub: "Seven decades of fiduciary insurance advice for businesses and the people behind them.",
   badge: "IRDAI registered · Broker License No. 182",
+  phoneLabel: "Phone number",
   image: {
     src: "/media/hero.webp",
-    alt: "A Peraj adviser talking a business client through their cover in a city office",
+    alt: "An adviser and a client reviewing business cover together at a desk",
   },
-  stats: [
-    { value: "99.8%", label: "Claims satisfaction" },
-    { value: "2 hrs", label: "Callback within" },
+  stat: { value: "99.8%", label: "Claims satisfaction" },
+  bubbles: [
+    { src: "/media/industry-infrastructure.webp", alt: "Infrastructure" },
+    { src: "/media/industry-energy.webp", alt: "Energy" },
+    { src: "/media/industry-financial.webp", alt: "Financial services" },
   ],
 };
 

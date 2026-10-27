@@ -35,11 +35,11 @@ export default function Proof() {
   const go = (dir: -1 | 1) => api?.scrollTo((selected + dir + slides.length) % slides.length, reducedMotion());
 
   return (
-    <section id="proof" aria-labelledby="proof-title" className="section overflow-hidden bg-ink text-white">
+    <section id="proof" aria-labelledby="proof-title" className="section overflow-hidden bg-ink text-beige">
       <div className="wrap">
         <SectionHeading id="proof-title" eyebrow={proof.eyebrow} title={proof.title} dark center />
 
-        <div className="mx-auto mt-(--title-gap) max-w-3xl text-center">
+        <div data-reveal className="mx-auto mt-(--title-gap) max-w-3xl text-center">
           <Quote aria-hidden className="mx-auto size-10 rotate-180 fill-current text-gold" strokeWidth={0} />
           <div className="mt-6 grid" aria-live="polite">
             {proof.items.map((p, i) => (
@@ -51,14 +51,14 @@ export default function Proof() {
                   i === active ? "opacity-100" : "invisible opacity-0",
                 )}
               >
-                <blockquote className="t-quote text-white">&ldquo;{p.quote}&rdquo;</blockquote>
-                <figcaption className="mt-6 text-white/70">
-                  <span className="font-semibold text-white">{p.who}</span>, {p.org}
+                <blockquote className="t-quote text-beige">&ldquo;{p.quote}&rdquo;</blockquote>
+                <figcaption className="mt-6 text-beige/75">
+                  <span className="font-semibold text-beige">{p.who}</span>, {p.org}
                 </figcaption>
               </figure>
             ))}
           </div>
-          <p className="mt-6 flex items-center justify-center gap-3 text-sm text-white/70">
+          <p className="mt-6 flex items-center justify-center gap-3 text-sm text-beige/75">
             <span className="flex gap-0.5 text-gold" aria-hidden>
               {Array.from({ length: 5 }).map((_, i) => (
                 <Star key={i} className="size-4 fill-current" />
@@ -69,7 +69,7 @@ export default function Proof() {
         </div>
       </div>
 
-      <div className="relative mx-auto mt-12 max-w-[calc(var(--container)+2*var(--gutter))]">
+      <div data-reveal className="relative mx-auto mt-12 max-w-[calc(var(--container)+2*var(--gutter))]">
         <Carousel setApi={setApi} opts={{ loop: true, align: "center", duration: 24 }}>
           <CarouselContent className="-ml-5">
             {slides.map((p, i) => {
@@ -83,7 +83,7 @@ export default function Proof() {
                     )}
                   >
                     <Image src={p.image} alt={on ? p.alt : ""} fill sizes="(min-width: 1024px) 26rem, (min-width: 640px) 44vw, 68vw" className="object-cover" />
-                    <span className="absolute bottom-4 left-4 rounded-full bg-ink/80 px-3 py-1.5 text-sm font-medium text-white">{p.sector}</span>
+                    <span className="absolute bottom-4 left-4 rounded-full bg-ink/80 px-3 py-1.5 text-sm font-medium text-beige">{p.sector}</span>
                   </div>
                 </CarouselItem>
               );
@@ -95,7 +95,7 @@ export default function Proof() {
           <Button
             variant="outline"
             size="icon"
-            className="pointer-events-auto size-11 border-white/30 bg-ink/60 text-white hover:border-white hover:text-white"
+            className="pointer-events-auto size-11 border-beige/30 bg-ink/60 text-beige hover:border-beige hover:text-beige"
             onClick={() => go(-1)}
             aria-label={proof.prev}
           >
@@ -104,7 +104,7 @@ export default function Proof() {
           <Button
             variant="outline"
             size="icon"
-            className="pointer-events-auto size-11 border-white/30 bg-ink/60 text-white hover:border-white hover:text-white"
+            className="pointer-events-auto size-11 border-beige/30 bg-ink/60 text-beige hover:border-beige hover:text-beige"
             onClick={() => go(1)}
             aria-label={proof.next}
           >

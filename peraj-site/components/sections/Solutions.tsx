@@ -12,7 +12,7 @@ export default function Solutions() {
         <div className="card-surface mt-(--title-gap) overflow-hidden">
           <ul className="grid gap-px bg-border sm:grid-cols-2 lg:grid-cols-3">
             {solutions.items.map((s) => (
-              <li key={s.title} className="bg-background p-7 transition-colors duration-(--duration-fast) hover:bg-mint/40 sm:p-8">
+              <li key={s.title} data-reveal className="bg-background/70 p-7 transition-colors duration-(--duration-fast) hover:bg-mint/40 sm:p-8">
                 <span className="flex size-11 items-center justify-center rounded-(--radius) bg-mint text-teal-deep">
                   <Icon name={s.icon} className="size-5" strokeWidth={1.5} />
                 </span>

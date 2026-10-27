@@ -15,6 +15,7 @@ export default function Why() {
           {stats.map((s, i) => (
             <div
               key={s.label}
+              data-reveal
               className={cn(
                 "flex flex-col gap-2 py-8 pr-5 lg:px-8 lg:py-10 lg:first:pl-0",
                 i % 2 === 1 && "border-l border-border pl-5",
@@ -31,7 +32,7 @@ export default function Why() {
           ))}
         </dl>
 
-        <ul className="mt-8 flex flex-wrap gap-2">
+        <ul data-reveal className="mt-8 flex flex-wrap gap-2">
           {why.countryChips.map((c) => (
             <li key={c} className="rounded-full border border-border bg-background px-4 py-2 text-sm text-navy">
               {c}

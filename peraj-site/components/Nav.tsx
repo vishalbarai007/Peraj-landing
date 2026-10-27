@@ -23,7 +23,7 @@ export default function Nav() {
     <header
       className={cn(
         "fixed inset-x-0 top-0 z-50 border-b transition-colors duration-(--duration-fast)",
-        scrolled ? "border-border bg-background" : "border-transparent bg-transparent",
+        scrolled ? "border-border bg-background/70 backdrop-blur-md" : "border-transparent bg-transparent",
       )}
     >
       <div className="wrap flex h-18 items-center justify-between gap-6">

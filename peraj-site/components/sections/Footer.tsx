@@ -2,13 +2,13 @@ import Image from "next/image";
 import { ArrowUp, ArrowUpRight } from "lucide-react";
 import { footer, nav, site } from "@/content/site";
 
-const link = "inline-flex min-h-11 items-center gap-1 transition-colors duration-(--duration-fast) hover:text-white";
-const heading = "text-sm font-semibold text-white";
+const link = "inline-flex min-h-11 items-center gap-1 transition-colors duration-(--duration-fast) hover:text-beige";
+const heading = "text-sm font-semibold text-beige";
 
 // Compact footer continuing the ink band from Contact: brand and licence, link columns, legal row.
 export default function Footer() {
   return (
-    <footer className="bg-ink text-white/70">
+    <footer className="bg-ink text-beige/75">
       <div className="wrap">
         <div className="grid gap-10 border-t border-white/10 py-14 md:grid-cols-12">
           <div className="md:col-span-5">
@@ -53,7 +53,7 @@ export default function Footer() {
           <div className="md:col-span-3">
             <h2 className={heading}>{footer.hqLabel}</h2>
             <p className="mt-4">{site.hq}.</p>
-            <a href="#top" className="mt-6 inline-flex min-h-11 items-center gap-2 text-sm text-white transition-colors duration-(--duration-fast) hover:text-gold">
+            <a href="#top" className="mt-6 inline-flex min-h-11 items-center gap-2 text-sm text-beige transition-colors duration-(--duration-fast) hover:text-gold">
               <ArrowUp aria-hidden strokeWidth={1.5} className="size-4" />
               {footer.top}
             </a>

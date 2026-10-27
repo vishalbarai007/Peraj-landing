@@ -10,7 +10,7 @@ export default function Faqs() {
       <div className="wrap grid gap-12 lg:grid-cols-12 lg:gap-16">
         <div className="lg:sticky lg:top-28 lg:col-span-4 lg:self-start">
           <SectionHeading id="faqs-title" eyebrow={faq.eyebrow} title={faq.title} />
-          <p className="mt-8 text-muted-foreground">{faq.more}</p>
+          <p data-reveal className="mt-8 text-muted-foreground">{faq.more}</p>
           <a
             href="#contact"
             className="group mt-1 inline-flex min-h-11 items-center gap-2 font-semibold text-teal-deep underline-offset-4 hover:underline"
@@ -20,7 +20,7 @@ export default function Faqs() {
           </a>
         </div>
 
-        <Accordion defaultValue={["q0"]} className="border-t border-border lg:col-span-8">
+        <Accordion data-reveal defaultValue={["q0"]} className="border-t border-border lg:col-span-8">
           {faq.items.map((f, i) => (
             <AccordionItem key={f.q} value={`q${i}`} className="border-b border-border">
               <AccordionTrigger className="items-center gap-6 rounded-none py-6 text-lg font-semibold text-navy hover:no-underline **:data-[slot=accordion-trigger-icon]:size-5 **:data-[slot=accordion-trigger-icon]:text-teal-deep">
